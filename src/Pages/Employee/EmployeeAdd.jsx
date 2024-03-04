@@ -42,8 +42,8 @@ const EmployeeAdd = () => {
     };
 
     return (
-        <div>
-            <h1>Employee Add by Admin</h1>
+        <div className="max-w-7xl mx-auto">
+            <h1 className="text-center my-10 text-4xl font-bold">Employee Add by Admin</h1>
             <div className="ml-8">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control w-full my-6">
