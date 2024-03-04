@@ -32,11 +32,11 @@ const EmployeeDetails = () => {
                     </thead>
                     <tbody>
                         {employees.map(employee => (
-                            <tr key={employee.id}>
+                            <tr key={employee._id}>
                                 <td>{employee.fname} {employee.lname}</td>
                                 <td>{employee.email}</td>
                                 <td>{employee.phone}</td>
-                                <Link to={`/update/${employee.id}`}>
+                                <Link to={`/update/${employee._id}`}>
                                         <button className="btn"> Update
                                         </button>
                                 </Link>
