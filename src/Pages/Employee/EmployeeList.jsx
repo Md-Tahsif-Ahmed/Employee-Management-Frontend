@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { CiEdit, CiViewBoard } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 
@@ -17,6 +16,16 @@ const EmployeeList = () => {
             });
     }, [axiosPublic]);
 
+    const handleDetails = (employeeId) => {
+        axiosPublic.get(`/employee/${employeeId}`)
+            .then(response => {
+                // Handle the response as needed
+            })
+            .catch(error => {
+                console.error('Error fetching employee details:', error);
+            });
+    };
+
     return (
         <div className="mt-20 max-w-7xl mx-auto">
             <h1 className="text-center my-10 text-4xl font-bold">Employee List</h1>
@@ -25,25 +34,24 @@ const EmployeeList = () => {
                     <thead>
                         <tr>
                             <th>Full name</th>
-                            
                             <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
                         {employees.map(employee => (
-                            <tr key={employee.id}>
+                            <tr key={employee._id}>
                                 <td>{employee.fname} {employee.lname}</td>
-                                 
                                 <td>
-                                    <Link to={`/details/${employee.id}`}>
-                                        <button className="btn"> Details
+                                    <Link to={`/details/${employee._id}`}>
+                                        <button onClick={() => handleDetails(employee._id)} className="btn" size="small">
+                                            Details
                                         </button>
                                     </Link>
-                                    <Link to={`/details/${employee.id}`}>
-                                        <button className="btn"> Details
+                                    <Link to={`/update/${employee._id}`}>
+                                        <button className="btn"> Update
                                         </button>
                                     </Link>
-                                    <Link to={`/delete/${employee.id}`}>
+                                    <Link to={`/delete/${employee._id}`}>
                                         <button className="btn"> Delete
                                         </button>
                                     </Link>

@@ -4,6 +4,7 @@ import {
 import Home from "../Pages/Home";
 import EmployeeAdd from "../Pages/Employee/EmployeeAdd";
 import EmployeeList from "../Pages/Employee/EmployeeList";
+import EmployeeDetails from "../Pages/Employee/EmployeeDetails";
 
   const router = createBrowserRouter([
     {
@@ -17,7 +18,11 @@ import EmployeeList from "../Pages/Employee/EmployeeList";
         {
           path: '/list',
           element: <EmployeeList></EmployeeList>,
-        }
+        },
+        {
+          path: '/details/:id',
+          element: <EmployeeDetails></EmployeeDetails>,
+        },
         
       ]
     },
