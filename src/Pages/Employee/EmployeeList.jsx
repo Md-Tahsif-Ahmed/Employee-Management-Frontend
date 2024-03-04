@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const EmployeeList = () => {
     const axiosPublic = useAxiosPublic();
@@ -25,6 +26,38 @@ const EmployeeList = () => {
                 console.error('Error fetching employee details:', error);
             });
     };
+
+    // Employee delete
+    // Employee delete
+const deleteEmployee = (id) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axiosPublic.delete(`/employee/${id}`)
+                .then(response => {
+                    if (response.data.deletedCount > 0) {
+                        Swal.fire('Deleted!', 'Employee has been deleted.', 'success');
+                        // After deletion, update the employee list
+                        setEmployees(prevEmployees => prevEmployees.filter(employee => employee._id !== id));
+                    } else {
+                        Swal.fire('Error!', 'Failed to delete the employee.', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting employee:', error);
+                    Swal.fire('Error!', 'An error occurred while deleting the employee.', 'error');
+                });
+        }
+    });
+};
+
 
     return (
         <div className="mt-20 max-w-7xl mx-auto">
@@ -51,10 +84,7 @@ const EmployeeList = () => {
                                         <button className="btn"> Update
                                         </button>
                                     </Link>
-                                    <Link to={`/delete/${employee._id}`}>
-                                        <button className="btn"> Delete
-                                        </button>
-                                    </Link>
+                                    <button onClick={() => deleteEmployee(employee._id)} className="btn" size="small">Delete</button>
                                 </td>
                             </tr>
                         ))}

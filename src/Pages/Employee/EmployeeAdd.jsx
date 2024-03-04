@@ -2,10 +2,12 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 import Swal from "sweetalert2";
 import { FaUtensils } from 'react-icons/fa'; // Import FaUtensils icon if not already imported
+import { useNavigate } from "react-router-dom";
 
 const EmployeeAdd = () => {
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -29,6 +31,7 @@ const EmployeeAdd = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                navigate('/list');
             }
         } catch (error) {
             console.error("Error adding employee:", error);
