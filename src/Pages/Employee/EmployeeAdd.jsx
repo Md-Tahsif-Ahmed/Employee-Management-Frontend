@@ -31,7 +31,7 @@ const EmployeeAdd = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                navigate('/list');
+                navigate('/');
             }
         } catch (error) {
             console.error("Error adding employee:", error);

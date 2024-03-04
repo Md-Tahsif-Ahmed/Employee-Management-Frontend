@@ -27,7 +27,16 @@ const EmployeeList = () => {
             });
     };
 
-    // Employee delete
+    // Toggle employee block status
+    const toggleBlockStatus = (id) => {
+        const updatedEmployees = employees.map(employee => {
+            if (employee._id === id) {
+                return { ...employee, blocked: !employee.blocked }; // Toggle block status
+            }
+            return employee;
+        });
+        setEmployees(updatedEmployees);
+    };
     // Employee delete
 const deleteEmployee = (id) => {
     Swal.fire({
@@ -80,10 +89,9 @@ const deleteEmployee = (id) => {
                                             Details
                                         </button>
                                     </Link>
-                                    <Link to={`/update/${employee._id}`}>
-                                        <button className="btn"> Update
-                                        </button>
-                                    </Link>
+                                    <button onClick={() => toggleBlockStatus(employee._id)} className="btn" size="small">
+                                        {employee.blocked ? 'Unblock' : 'Block'}
+                                    </button>
                                     <button onClick={() => deleteEmployee(employee._id)} className="btn" size="small">Delete</button>
                                 </td>
                             </tr>

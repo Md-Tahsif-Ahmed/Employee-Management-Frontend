@@ -13,11 +13,11 @@ import EmployeeUpdate from "../Pages/Employee/EmployeeUpdate";
       element: <Home></Home>,
       children: [
         {
-            path: '/',
+            path: '/add',
             element: <EmployeeAdd></EmployeeAdd>,
         },
         {
-          path: '/list',
+          path: '/',
           element: <EmployeeList></EmployeeList>,
         },
         {
